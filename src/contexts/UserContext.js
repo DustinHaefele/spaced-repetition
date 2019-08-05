@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import AuthApiService from '../services/auth-api-service'
 import TokenService from '../services/token-service'
 import IdleService from '../services/idle-service'
+import LanguageService from '../services/language-service'
 
 const UserContext = React.createContext({
   user: {},
+  language: {},
+  words: [],
   error: null,
   setError: () => {},
   clearError: () => {},
@@ -72,6 +75,20 @@ export class UserProvider extends Component {
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken()
     })
+    this.fetchLanguage()
+  }
+
+  fetchLanguage = () => {
+    const state = { language: {}, words: [], error: null }
+
+    LanguageService.getLanguage().then( langPayload => {
+      if (langPayload) {
+        state.language = langPayload.language
+        state.words = langPayload.words
+      }
+      this.setState({ language: state.language })
+      this.setState({ words: state.words })
+    })
   }
 
   processLogout = () => {
@@ -104,6 +121,8 @@ export class UserProvider extends Component {
   render() {
     const value = {
       user: this.state.user,
+      language: this.state.language,
+      words: this.state.words,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
