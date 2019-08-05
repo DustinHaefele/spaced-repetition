@@ -3,6 +3,7 @@ import { Input, Label } from '../Form/Form'
 import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
 import Button from '../Button/Button'
+import './LoginForm.css'
 
 class LoginForm extends Component {
   static defaultProps = {
@@ -56,6 +57,7 @@ class LoginForm extends Component {
           </Label>
           <Input
             ref={this.firstInput}
+            className='login-input'
             id='login-username-input'
             name='username'
             required
