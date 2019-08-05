@@ -1,6 +1,6 @@
 import React from 'react';
 import UserContext from '../../contexts/UserContext';
-
+import './WordList.css'
 
 export default class WordList extends React.Component {
 

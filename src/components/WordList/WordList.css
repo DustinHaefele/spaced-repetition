@@ -1,0 +1,13 @@
+ul {
+  list-style: none;
+  width:500px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+li {
+  margin: 10px;
+  border: solid 1px;
+  border-radius: 30px;
+  background-color:rgba(211, 211, 211, 0.8);
+}
