@@ -10,9 +10,9 @@ export default class WordList extends React.Component {
     const wordsArr = this.context.words.map((word, i) => {
       return (
       <li key={i}>
-        <p>{word.original}</p>
-        <p>Correct Guesses: {word.correct_count}</p>
-        <p>Incorrect Guesses: {word.incorrect_count}</p>
+        <h4>{word.original}</h4>
+        <p>correct answer count: {word.correct_count}</p>
+        <p>incorrect answer count: {word.incorrect_count}</p>
       </li>);
     });
     return wordsArr;

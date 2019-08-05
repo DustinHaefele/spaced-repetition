@@ -14,13 +14,14 @@ class DashboardRoute extends Component {
     return (
       <section>
           <MyLanguage />
+          <h3>Words to practice</h3>
           <WordList />
           <Link to='/learn'>
             <Button type='button'>
-              Start Learning
+              Start practicing
             </Button>
           </Link>
-          {this.context.language && (<p>Total Score: {this.context.language.total_score}</p>) }
+          {this.context.language && (<p>Total correct answers: {this.context.language.total_score}</p>) }
       </section>
     );
   }
