@@ -3,7 +3,7 @@ import React from 'react';
 function MyLanguage () {
 
   return (
-    <h2>{this.props.language.name}</h2>
+    <h2>{this.context.language.name}</h2>
   )
 }
 
