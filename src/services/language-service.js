@@ -9,8 +9,6 @@ const LanguageService = {
         'content-type': 'application/json',
         'authorization': `Bearer ${TokenService.getAuthToken()}`,
       },
-
-      // body: JSON.stringify(language),
     })
       .then(res =>
         (!res.ok)

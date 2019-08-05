@@ -42,6 +42,7 @@ export class UserProvider extends Component {
       TokenService.queueCallbackBeforeExpiry(() => {
         this.fetchRefreshToken()
       })
+      this.fetchLanguage();
     }
   }
 
@@ -75,7 +76,6 @@ export class UserProvider extends Component {
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken()
     })
-    this.fetchLanguage()
   }
 
   fetchLanguage = () => {
@@ -117,6 +117,8 @@ export class UserProvider extends Component {
         this.setError(err)
       })
   }
+
+
 
   render() {
     const value = {

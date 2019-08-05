@@ -3,10 +3,14 @@ import {Link} from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import WordList from '../../components/WordList/WordList';
 import MyLanguage from '../../components/MyLanguage/MyLanguage';
-
+import UserContext from '../../contexts/UserContext';
 
 class DashboardRoute extends Component {
+
+  static contextType = UserContext;
+  
   render() {
+    console.log(this.context);
     return (
       <section>
           <MyLanguage />
@@ -16,7 +20,7 @@ class DashboardRoute extends Component {
               Start Learning
             </Button>
           </Link>
-          <p>Total Score: {this.context.language.total_score}</p>
+          {this.context.language && (<p>Total Score: {this.context.language.total_score}</p>) }
       </section>
     );
   }
