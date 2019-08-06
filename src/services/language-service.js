@@ -37,9 +37,7 @@ const LanguageService = {
         'content-type': 'application/json',
         'authorization': `Bearer ${TokenService.getAuthToken()}`,
       },
-      body: {
-        'guess': guess
-      }
+      body: JSON.stringify({guess: guess})
     })
     .then(res =>
       (!res.ok) 
