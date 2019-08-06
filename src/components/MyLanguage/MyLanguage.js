@@ -6,11 +6,7 @@ class MyLanguage extends React.Component {
   static contextType = UserContext;
 
   render(){
-    if(this.context.language) {
-      return <h2>{this.context.language.name}</h2>
-    } else{
-      return <></>
-    }
+    return <>{this.props.language && <h2>{this.props.language.name}</h2>}</> 
   }
 }
 

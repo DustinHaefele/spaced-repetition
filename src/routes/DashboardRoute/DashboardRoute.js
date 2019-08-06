@@ -39,9 +39,9 @@ class DashboardRoute extends Component {
       // <UserContext.Consumer>
       // {(value) => { console.log(value)
         return (<section>
-          <MyLanguage />
+          <MyLanguage language={this.state.language}/>
           <h3>Words to practice</h3>
-          <WordList />
+          <WordList words={this.state.words}/>
           <Link to='/learn'>
             <Button type='button'>
               Start practicing
