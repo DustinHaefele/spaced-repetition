@@ -15,6 +15,20 @@ const LanguageService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
+  },
+  getWord() {
+    return fetch(`${config.API_ENDPOINT}/language/head`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res => 
+      (!res.ok)
+      ? res.json().then(e => Promise.reject(e))
+      : res.json()
+      )
   }
 }
 

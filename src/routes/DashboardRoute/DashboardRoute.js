@@ -7,7 +7,7 @@ import UserContext from '../../contexts/UserContext';
 
 class DashboardRoute extends Component {
 
-  static contextType = UserContext;
+  // static contextType = UserContext;
   
   render() {
     
