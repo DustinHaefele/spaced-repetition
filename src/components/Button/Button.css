@@ -10,3 +10,8 @@
   color:#02111B;
 
 }
+
+.Button:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(179, 177, 177, 0.6); 
+}

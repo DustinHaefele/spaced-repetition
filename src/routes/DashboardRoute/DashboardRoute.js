@@ -10,9 +10,11 @@ class DashboardRoute extends Component {
   static contextType = UserContext;
   
   render() {
-    console.log(this.context);
+    
     return (
-      <section>
+      <UserContext.Consumer>
+      {(value) => { console.log(value)
+        return (<section>
           <MyLanguage />
           <h3>Words to practice</h3>
           <WordList />
@@ -22,7 +24,8 @@ class DashboardRoute extends Component {
             </Button>
           </Link>
           {this.context.language && (<p>Total correct answers: {this.context.language.total_score}</p>) }
-      </section>
+      </section>)}}
+      </UserContext.Consumer>
     );
   }
 }
