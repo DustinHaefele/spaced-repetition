@@ -11,6 +11,12 @@ class LearningRoute extends Component {
     LanguageService.getWord().then(word => this.setState({word}))
   }
 
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target['learn-guess-input'].value); 
+   return LanguageService.postGuess(e.target['learn-guess-input'].value)
+  }
+
   render() {
     return (
       <div>
@@ -23,7 +29,7 @@ class LearningRoute extends Component {
             <p>You have answered this word incorrectly {this.state.word.wordIncorrectCount} times.</p>
           </section>
         )}
-        <form>
+        <form onSubmit={this.handleFormSubmit}>
           <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
           <Input type='text' required id='learn-guess-input' name='learn-guess-input'></Input>
           <Button type='submit'>Submit your answer</Button>
