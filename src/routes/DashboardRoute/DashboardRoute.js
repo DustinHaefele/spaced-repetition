@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import WordList from '../../components/WordList/WordList';
 import MyLanguage from '../../components/MyLanguage/MyLanguage';
-import UserContext from '../../contexts/UserContext';
-import LanguageService from '../../services/language-service'
+import LanguageContext from '../../contexts/LanguageContext';
 
 class DashboardRoute extends Component {
   state = {
@@ -13,44 +12,24 @@ class DashboardRoute extends Component {
   }
 
   componentDidMount() {
-    this.fetchLanguage()
+    this.context.fetchLanguage()
   }
 
-  fetchLanguage = () => {
-    const state = { language: {}, words: [], error: null }
-
-    LanguageService.getLanguage().then( langPayload => {
-      if (langPayload) {
-        state.language = langPayload.language
-        state.words = langPayload.words
-      }
-      this.setState({ language: state.language })
-      this.setState({ words: state.words })
-      this.context.language = this.state.language
-      this.context.words = this.state.words
-    })
-  }
-
-  static contextType = UserContext;
+  static contextType = LanguageContext;
   
   render() {
-    
-    // return (
-      // <UserContext.Consumer>
-      // {(value) => { console.log(value)
-        return (<section>
-          <MyLanguage language={this.state.language}/>
+    return (
+      <section>
+          <MyLanguage language={this.context.language}/>
           <h3>Words to practice</h3>
-          <WordList words={this.state.words}/>
+          <WordList words={this.context.words}/>
           <Link to='/learn'>
             <Button type='button'>
               Start practicing
             </Button>
           </Link>
-          {this.state.language && (<p>Total correct answers: {this.state.language.total_score}</p>) }
+          {this.context.language && (<p>Total correct answers: {this.context.language.total_score}</p>) }
       </section>)
-      // </UserContext.Consumer>
-    // );
   }
 }
 
