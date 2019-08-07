@@ -58,7 +58,7 @@ class LearningRoute extends Component {
           <LearningContext.Consumer>
             {learning => (
               <div>
-                {learning}
+                <p>{language.words[0].original}</p>
                 {(this.state.word && this.state.guess === null) && (
                   <section>
                     <h2>Translate the word:</h2>
