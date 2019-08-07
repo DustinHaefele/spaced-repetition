@@ -60,6 +60,8 @@ class LoginForm extends Component {
             className='login-input'
             id='login-username-input'
             name='username'
+            aria-label='Enter Username'
+            aria-required="true"
             required
           />
         </div>
@@ -71,6 +73,8 @@ class LoginForm extends Component {
             id='login-password-input'
             name='password'
             type='password'
+            aria-label='Enter Password'
+            aria-required="true"
             required
           />
         </div>
