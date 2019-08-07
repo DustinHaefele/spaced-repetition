@@ -19,6 +19,21 @@ class LearningRoute extends Component {
     LanguageService.getWord().then(word => this.setState({word}))
   }
 
+  getNextWord = () => {
+    this.setState({
+      word: null,
+      answer: null,
+      nextWord: null,
+      isCorrect: null,
+      totalScore: null,
+      wordCorrectCount: null,
+      wordIncorrectCount: null,
+      guess: null
+    });
+    
+    LanguageService.getWord().then(word => this.setState({word}));
+  }
+
   handleFormSubmit = (e) => {
    e.preventDefault();
    const guess = e.target['learn-guess-input'].value;
@@ -60,9 +75,9 @@ class LearningRoute extends Component {
             <div className='DisplayFeedback'> 
               <p>The correct translation for {this.state.word.nextWord} was {this.state.answer} and you chose {this.state.guess}!</p>
             </div>
-            <p>Total Correct: {this.state.wordCorrectCount}</p>
-            <p>Total Incorrect: {this.state.wordIncorrectCount}</p>
-            <Button>Try another word!</Button>
+            <p>Total Correct: {this.state.word.wordCorrectCount}</p>
+            <p>Total Incorrect: {this.state.word.wordIncorrectCount + 1}</p>
+            <Button onClick={()=>this.getNextWord()}>Try another word!</Button>
           </div>
           )}
         {this.state.isCorrect === true && (
@@ -74,9 +89,9 @@ class LearningRoute extends Component {
             <div className='DisplayFeedback'> 
               <p>The correct translation for {this.state.word.nextWord} was {this.state.answer} and you chose {this.state.guess}!</p>
             </div>
-            <p>Total Correct: {this.state.wordCorrectCount}</p>
-            <p>Total Incorrect: {this.state.wordIncorrectCount}</p>
-            <Button>Try another word!</Button>
+            <p>Total Correct: {this.state.word.wordCorrectCount + 1}</p>
+            <p>Total Incorrect: {this.state.word.wordIncorrectCount}</p>
+            <Button onClick={()=>this.getNextWord()}>Try another word!</Button>
           </div>
           )}
         
