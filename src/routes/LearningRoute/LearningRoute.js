@@ -6,48 +6,12 @@ import LanguageContext from '../../contexts/LanguageContext'
 import LearningContext from '../../contexts/LearningContext'
 
 class LearningRoute extends Component {
-  // state = {
-  //   word: null,
-  //   answer: null,
-  //   nextWord: null,
-  //   isCorrect: null,
-  //   totalScore: null,
-  //   wordCorrectCount: null,
-  //   wordIncorrectCount: null,
-  //   guess: null
-  // }
 
-  getNextWord = () => {
+  static contextType = LearningContext;
 
-    LearningContext.setIsCorrect(null);
-    // this.setState({
-    //   word: null,
-    //   answer: null,
-    //   nextWord: null,
-    //   isCorrect: null,
-    //   totalScore: null,
-    //   wordCorrectCount: null,
-    //   wordIncorrectCount: null,
-    //   guess: null
-    // });
-    
-    //LanguageService.getWord().then(word => this.setState({word}));
+  componentDidMount(){
+   this.context.getWordAtHead();
   }
-
-  // handleFormSubmit = (e) => {
-  //  e.preventDefault();
-  //  const guess = e.target['learn-guess-input'].value;
-  //  return LanguageService.postGuess(guess).then(res =>
-  //   this.setState({
-  //     answer: res.answer,
-  //     nextWord: res.nextWord,
-  //     isCorrect: res.isCorrect,
-  //     totalScore: res.totalScore,
-  //     wordCorrectCount: res.wordCorrectCount,
-  //     wordIncorrectCount: res.wordIncorrectCount,
-  //     guess
-  //   }))
-  // }
 
   render() {
     return (
@@ -56,8 +20,7 @@ class LearningRoute extends Component {
           <LearningContext.Consumer>
             {learning => (
               <div>
-                {/* (learning.nextWord && learning.guess === null) */}
-                { (learning.isCorrect === null && learning.nextWord) && (
+                {(learning.isCorrect === null && learning.nextWord) && (
                   <section>
                     <h2>Translate the word:</h2>
                     <span>{learning.nextWord}</span>
@@ -78,10 +41,10 @@ class LearningRoute extends Component {
                     </div>
                     <h2>Good try, but not quite right :(</h2>
                     <div className='DisplayFeedback'> 
-                      <p>The correct translation for {learning.prevWord} was {learning.answer} and you chose {learning.guess}!</p> {/*change this.state to learning */}
+                      <p>The correct translation for {learning.prevWord.orginal} was {learning.answer} and you chose {learning.guess}!</p> {/*change this.state to learning */}
                     </div>
-                    <p>Total Correct: {learning.wordCorrectCount}</p> {/*this.state.word should be learning */}
-                    <p>Total Incorrect: {learning.wordIncorrectCount + 1}</p>
+                    <p>Total Correct: {learning.prevWord.wordCorrectCount}</p> {/*this.state.word should be learning */}
+                    <p>Total Incorrect: {learning.prevWord.wordIncorrectCount + 1}</p>
                     <Button onClick={()=>learning.setIsCorrect(null)}>Try another word!</Button>
                   </div>
                 )}
@@ -92,10 +55,10 @@ class LearningRoute extends Component {
                       <p>Your total score is: {learning.totalScore}</p>
                     </div>
                     <div className='DisplayFeedback'> 
-                      <p>The correct translation for {learning.prevWord} was {learning.answer} and you chose {learning.guess}!</p>
+                      <p>The correct translation for {learning.prevWord.original} was {learning.answer} and you chose {learning.guess}!</p>
                     </div>
-                    <p>Total Correct: {learning.wordCorrectCount + 1}</p>
-                    <p>Total Incorrect: {learning.wordIncorrectCount}</p>
+                    <p>Total Correct: {learning.prevWord.wordCorrectCount + 1}</p>
+                    <p>Total Incorrect: {learning.prevWord.wordIncorrectCount}</p>
                     <Button onClick={()=>learning.setIsCorrect(null)}>Try another word!</Button>
                   </div>
                 )}

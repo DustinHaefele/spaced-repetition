@@ -38,9 +38,9 @@ export class LearningProvider extends Component {
     ...initialState,
   };
 
-  componentDidMount(){
-    this.getWordAtHead();
-  }
+  // componentDidMount(){
+  //   this.getWordAtHead();
+  // }
   
   setError = error => {
     console.error(error)
@@ -94,10 +94,16 @@ export class LearningProvider extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const guess = e.target['learn-guess-input'].value;
+    const prevWord = {
+      original: this.state.nextWord, 
+      wordCorrectCount: this.state.wordCorrectCount,
+      wordIncorrectCount: this.state.wordIncorrectCount,
+      answer: this.state.answer
+    }
     return LanguageService.postGuess(guess).then(res =>
      this.setState({
        answer: res.answer,
-       prevWord: this.state.nextWord,
+       prevWord: prevWord,
        nextWord: res.nextWord,
        isCorrect: res.isCorrect,
        totalScore: res.totalScore,
@@ -136,6 +142,7 @@ export class LearningProvider extends Component {
       setPrevWord: this.setPrevWord,
       setIsCorrect: this.setIsCorrect,
       setAnswer: this.setAnswer,
+      getWordAtHead: this.getWordAtHead,
       handleFormSubmit: this.handleFormSubmit,
       reset: this.reset,
     }
