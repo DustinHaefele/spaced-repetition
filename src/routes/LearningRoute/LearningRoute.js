@@ -41,7 +41,7 @@ class LearningRoute extends Component {
                     </div>
                     <h2>Good try, but not quite right :(</h2>
                     <div className='DisplayFeedback'> 
-                      <p>The correct translation for {learning.prevWord.orginal} was {learning.answer} and you chose {learning.guess}!</p> {/*change this.state to learning */}
+                      <p>The correct translation for {learning.prevWord.original} was {learning.answer} and you chose {learning.guess}!</p> {/*change this.state to learning */}
                     </div>
                     <p>Total Correct: {learning.prevWord.wordCorrectCount}</p> {/*this.state.word should be learning */}
                     <p>Total Incorrect: {learning.prevWord.wordIncorrectCount + 1}</p>
