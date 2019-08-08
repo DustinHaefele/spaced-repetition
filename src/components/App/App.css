@@ -1,0 +1,6 @@
+body {
+  min-width: 320px;
+  background-image: url('../../media/words.jpg');
+  background-size: cover;
+  min-height: 100vh;
+}

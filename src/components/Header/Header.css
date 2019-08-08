@@ -3,16 +3,21 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #C0D6DF;
+  background-color: #000000;
+  color: #ffffff;
   font-family: 'Titillium Web', sans-serif;
 }
 
 header a {
   margin: 0 5px;
   text-decoration: none;
-  color: black;
+  color: #ffffff;
 }
 
 header a:hover {
   text-decoration: underline;
+}
+
+h1 {
+  font-size: 25px;
 }

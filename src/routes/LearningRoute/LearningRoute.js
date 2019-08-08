@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import LanguageService from '../../services/language-service'
 import {Input} from '../../components/Form/Form'
 import Button from '../../components/Button/Button'
 import LanguageContext from '../../contexts/LanguageContext'
 import LearningContext from '../../contexts/LearningContext'
+import './LearningRoute.css'
 
 class LearningRoute extends Component {
 
@@ -21,12 +21,12 @@ class LearningRoute extends Component {
             {learning => (
               <div>
                 {(learning.isCorrect === null && learning.nextWord) && (
-                  <section>
+                  <section className='learningRoute'>
                     <h2>Translate the word:</h2>
                     <span>{learning.nextWord}</span>
                     <p>Your total score is: {learning.totalScore}</p>
-                    <p>You have answered this word correctly {learning.wordCorrectCount} times.</p>
-                    <p>You have answered this word incorrectly {learning.wordIncorrectCount} times.</p>
+                    <p>Times answered correctly: {learning.wordCorrectCount}</p>
+                    <p>Times answered incorrectly: {learning.wordIncorrectCount}</p>
                     <form onSubmit={learning.handleFormSubmit}> {/*This handleSubmit will need to be moved to context */}
                       <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
                       <Input type='text' required id='learn-guess-input' name='learn-guess-input'></Input>
@@ -35,7 +35,7 @@ class LearningRoute extends Component {
                   </section>
                 )}
                 {learning.isCorrect === false && (
-                  <div>
+                  <section className='learningRoute'>
                     <div className='DisplayScore'>
                       <p>Your total score is: {learning.totalScore}</p> 
                     </div>
@@ -46,10 +46,10 @@ class LearningRoute extends Component {
                     <p>Total Correct: {learning.prevWord.wordCorrectCount}</p> {/*this.state.word should be learning */}
                     <p>Total Incorrect: {learning.prevWord.wordIncorrectCount + 1}</p>
                     <Button onClick={()=>learning.setIsCorrect(null)}>Try another word!</Button>
-                  </div>
+                  </section>
                 )}
                 {learning.isCorrect === true && (
-                  <div>
+                  <section className='learningRoute'>
                     <h2>You were correct! :D</h2>
                     <div className='DisplayScore'>
                       <p>Your total score is: {learning.totalScore}</p>
@@ -60,7 +60,7 @@ class LearningRoute extends Component {
                     <p>Total Correct: {learning.prevWord.wordCorrectCount + 1}</p>
                     <p>Total Incorrect: {learning.prevWord.wordIncorrectCount}</p>
                     <Button onClick={()=>learning.setIsCorrect(null)}>Try another word!</Button>
-                  </div>
+                  </section>
                 )}
               </div>
               )}

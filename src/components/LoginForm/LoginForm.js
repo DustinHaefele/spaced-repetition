@@ -48,6 +48,7 @@ class LoginForm extends Component {
         className='LoginForm'
         onSubmit={this.handleSubmit}
       >
+        <h2>Login</h2>
         <div role='alert'>
           {error && <p>{error}</p>}
         </div>
