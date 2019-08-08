@@ -17,10 +17,6 @@ class LearningRoute extends Component {
     guess: null
   }
 
-  componentDidMount() {
-    LanguageService.getWord().then(word => this.setState({word}))
-  }
-
   getNextWord = () => {
     this.setState({
       word: null,
@@ -58,46 +54,45 @@ class LearningRoute extends Component {
           <LearningContext.Consumer>
             {learning => (
               <div>
-                <p>{language.words[0].original}</p>
-                {(this.state.word && this.state.guess === null) && (
+                {(learning.nextWord && learning.guess === null) && (
                   <section>
                     <h2>Translate the word:</h2>
-                    <span>{this.state.word.nextWord}</span>
-                    <p>Your total score is: {this.state.word.totalScore}</p>
-                    <p>You have answered this word correctly {this.state.word.wordCorrectCount} times.</p>
-                    <p>You have answered this word incorrectly {this.state.word.wordIncorrectCount} times.</p>
-                    <form onSubmit={this.handleFormSubmit}>
+                    <span>{learning.nextWord}</span>
+                    <p>Your total score is: {learning.totalScore}</p>
+                    <p>You have answered this word correctly {learning.wordCorrectCount} times.</p>
+                    <p>You have answered this word incorrectly {learning.wordIncorrectCount} times.</p>
+                    <form onSubmit={learning.handleFormSubmit}> {/*This handleSubmit will need to be moved to context */}
                       <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
                       <Input type='text' required id='learn-guess-input' name='learn-guess-input'></Input>
                       <Button type='submit'>Submit your answer</Button>
                     </form>
                   </section>
                 )}
-                {this.state.isCorrect === false && (
+                {learning.isCorrect === false && (
                   <div>
                     <div className='DisplayScore'>
-                      <p>Your total score is: {this.state.totalScore}</p>
+                      <p>Your total score is: {learning.totalScore}</p> 
                     </div>
                     <h2>Good try, but not quite right :(</h2>
                     <div className='DisplayFeedback'> 
-                      <p>The correct translation for {this.state.word.nextWord} was {this.state.answer} and you chose {this.state.guess}!</p>
+                      <p>The correct translation for {learning.prevWord} was {learning.answer} and you chose {learning.guess}!</p> {/*change this.state to learning */}
                     </div>
-                    <p>Total Correct: {this.state.word.wordCorrectCount}</p>
-                    <p>Total Incorrect: {this.state.word.wordIncorrectCount + 1}</p>
+                    <p>Total Correct: {learning.wordCorrectCount}</p> {/*this.state.word should be learning */}
+                    <p>Total Incorrect: {learning.wordIncorrectCount + 1}</p>
                     <Button onClick={()=>this.getNextWord()}>Try another word!</Button>
                   </div>
                 )}
-                {this.state.isCorrect === true && (
+                {learning.isCorrect === true && (
                   <div>
                     <h2>You were correct! :D</h2>
                     <div className='DisplayScore'>
-                      <p>Your total score is: {this.state.totalScore}</p>
+                      <p>Your total score is: {learning.totalScore}</p>
                     </div>
                     <div className='DisplayFeedback'> 
-                      <p>The correct translation for {this.state.word.nextWord} was {this.state.answer} and you chose {this.state.guess}!</p>
+                      <p>The correct translation for {learning.prevWord} was {learning.answer} and you chose {learning.guess}!</p>
                     </div>
-                    <p>Total Correct: {this.state.word.wordCorrectCount + 1}</p>
-                    <p>Total Incorrect: {this.state.word.wordIncorrectCount}</p>
+                    <p>Total Correct: {learning.wordCorrectCount + 1}</p>
+                    <p>Total Incorrect: {learning.wordIncorrectCount}</p>
                     <Button onClick={()=>this.getNextWord()}>Try another word!</Button>
                   </div>
                 )}

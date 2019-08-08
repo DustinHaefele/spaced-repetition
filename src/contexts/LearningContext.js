@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import LanguageService from '../services/language-service';
 
 const initialState = ({
   totalScore: 0,
@@ -12,6 +13,9 @@ const initialState = ({
   error: null,
 });
 
+
+
+
 const LearningContext = React.createContext({
   ...initialState,
   setError: () => { },
@@ -23,6 +27,7 @@ const LearningContext = React.createContext({
   setGuess: () => { },
   setAnswer: () => { },
   setIsCorrect: () => { },
+  getWordAtHead: () =>{ },
   reset: () => { },
 });
 
@@ -33,9 +38,21 @@ export class LearningProvider extends Component {
     ...initialState,
   };
 
+  componentDidMount(){
+    this.getWordAtHead();
+  }
+  
   setError = error => {
     console.error(error)
     this.setState({ error })
+  }
+
+  getWordAtHead = () => {
+    LanguageService.getWord().then(word => this.setState({
+      nextWord: word.nextWord,
+      wordCorrectCount: word.wordCorrectCount,
+      wordIncorrectCount: word.wordIncorrectCount,
+      totalScore: word.totalScore}))
   }
 
   clearError = () => {
@@ -74,6 +91,22 @@ export class LearningProvider extends Component {
     this.setState({ answer })
   }
 
+  handleFormSubmit = e => {
+    e.preventDefault();
+    const guess = e.target['learn-guess-input'].value;
+    return LanguageService.postGuess(guess).then(res =>
+     this.setState({
+       answer: res.answer,
+       prevWord: this.state.nextWord,
+       nextWord: res.nextWord,
+       isCorrect: res.isCorrect,
+       totalScore: res.totalScore,
+       wordCorrectCount: res.wordCorrectCount,
+       wordIncorrectCount: res.wordIncorrectCount,
+       guess
+     }))
+  }
+
   reset = () => {
     this.setState({
       ...initialState,
@@ -103,6 +136,7 @@ export class LearningProvider extends Component {
       setPrevWord: this.setPrevWord,
       setIsCorrect: this.setIsCorrect,
       setAnswer: this.setAnswer,
+      handleFormSubmit: this.handleFormSubmit,
       reset: this.reset,
     }
     return (
