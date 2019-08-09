@@ -19,7 +19,7 @@ class DashboardRoute extends Component {
   
   render() {
     return (
-      <section>
+      <section className='container'>
           <MyLanguage language={this.context.language}/>
           <h3>Words to practice</h3>
           <WordList words={this.context.words}/>

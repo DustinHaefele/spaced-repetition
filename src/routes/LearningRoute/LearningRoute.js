@@ -29,7 +29,7 @@ class LearningRoute extends Component {
                     <p>Times answered incorrectly: {learning.wordIncorrectCount}</p>
                     <form onSubmit={learning.handleFormSubmit}> {/*This handleSubmit will need to be moved to context */}
                       <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
-                      <Input type='text' required id='learn-guess-input' name='learn-guess-input'></Input>
+                      <Input type='text' required id='learn-guess-input' name='learn-guess-input' placeholder='Submit your guess'></Input>
                       <Button type='submit'>Submit your answer</Button>
                     </form>
                   </section>

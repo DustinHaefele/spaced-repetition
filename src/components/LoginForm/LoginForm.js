@@ -45,7 +45,7 @@ class LoginForm extends Component {
     const { error } = this.state
     return (
       <form
-        className='LoginForm'
+        className='container'
         onSubmit={this.handleSubmit}
       >
         <h2>Login</h2>
