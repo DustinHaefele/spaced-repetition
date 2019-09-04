@@ -23,12 +23,12 @@ class LearningRoute extends Component {
                 {(learning.isCorrect === null && learning.nextWord) && (
                   <section className='learningRoute'>
                     <h2>Translate the word:</h2>
-                    <span>{learning.nextWord}</span>
+                    <h3 className='word'>{learning.nextWord}</h3>
                     <p>Your total score is: {learning.totalScore}</p>
                     <p>Times answered correctly: {learning.wordCorrectCount}</p>
                     <p>Times answered incorrectly: {learning.wordIncorrectCount}</p>
                     <form onSubmit={learning.handleFormSubmit}> {/*This handleSubmit will need to be moved to context */}
-                      <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
+                      <label htmlFor='learn-guess-input' className='label'>What's the translation for this word?</label>
                       <Input type='text' required id='learn-guess-input' name='learn-guess-input' placeholder='Submit your guess'></Input>
                       <Button type='submit'>Submit your answer</Button>
                     </form>
